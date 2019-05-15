@@ -2,15 +2,14 @@ import java.util.*;
 
 public class C1 {
     public static void main(String[] args) {
-        int[][] image = { {1, 2, 3, 4},
-                          {5, 6, 7, 8},
-                          {9, 10, 11, 12},
-                          {13, 14, 15, 16}};
-        print2dArray(image);
-        System.out.println();
-        System.out.println();
-        rotate(image, true);
-        print2dArray(image);
+        int[][] matrix = {{5, 6, 0},
+                          {2, 9, 8},
+                          {0, 1, 4},
+                          {12, 19, 3},
+                          {7, 14, 20},
+                          {0, 6, 0}};
+       zero(matrix);
+       print2dArray(matrix);
     }
 
     /* Problem 1.1
@@ -235,6 +234,40 @@ public class C1 {
                 System.out.print(" " + a[i][j]);
             }
             System.out.println();
+        }
+    }
+
+    /**
+     * Problem 1.8
+     */
+    public static void zero(int[][] matrix) {
+        Set<Integer> rowsWithZeros = new TreeSet<>();
+        Set<Integer> columnsWithZeros = new TreeSet<>();
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] == 0) {
+                    rowsWithZeros.add(i);
+                    columnsWithZeros.add(j);
+                }
+            }
+        }
+        for (int row : rowsWithZeros) {
+            setRowToZero(matrix, row);
+        }
+        for (int column : columnsWithZeros) {
+            setColumnToZero(matrix, column);
+        }
+    }
+
+    private static void setRowToZero(int[][] matrix, int row) {
+        for (int i = 0; i < matrix[row].length; i++) {
+            matrix[row][i] = 0;
+        }
+    }
+
+    private static void setColumnToZero(int[][] matrix, int column) {
+        for (int i = 0; i < matrix.length; i++) {
+            matrix[i][column] = 0;
         }
     }
 }
