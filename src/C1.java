@@ -14,7 +14,9 @@ public class C1 {
     }
 
     /* Problem 1.1
-    * */
+     * Time: O(n^2)
+     * Space: O(1)
+     */
     public static boolean isUniqueChars(String s){
         //O(n) space, O(n) time
 //        List<Character> l = new ArrayList<>();
@@ -35,7 +37,9 @@ public class C1 {
     }
 
     /* Problem 1.2
-    * */
+     * Time: O(n)
+     * Space: O(n)
+     */
     public static boolean arePermutations(String s1, String s2) {
         if (s1.length() != s2.length()) {
             return false;
@@ -52,7 +56,9 @@ public class C1 {
     }
 
     /* Problem 1.3
-    * */
+     * Time: O(n)
+     * Space: O(n)
+     */
     public static String replace(String s1, char toReplace) {
         char[] c = s1.toCharArray();
         int numSpaces = 0;
@@ -74,10 +80,16 @@ public class C1 {
                 index--;
             }
         }
-        System.out.println(toList(c));
-        return "";
+        return toString(c);
     }
 
+    private static String toString(char[] c) {
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < c.length; i++) {
+            s.append(c[i]);
+        }
+        return s.toString();
+    }
 
     private static List<Character> toList(char[] c) {
         List<Character> l = new ArrayList<>();
@@ -89,6 +101,8 @@ public class C1 {
 
     /**
      * Problem 1.4
+     * Time: O(n)
+     * Space: O(n)
      */
     public static boolean isPalindromePermutation(String s) {
         if (s.length() == 0) {
@@ -119,6 +133,8 @@ public class C1 {
 
     /**
      * Problem 1.5
+     * Time: O(n)
+     * Space: O(n)
      */
     public static boolean editDistanceLessThanOne(String s1, String s2) {
         if (Math.abs(s1.length() - s2.length()) > 1) {
@@ -167,6 +183,8 @@ public class C1 {
 
     /**
      * Problem 1.6
+     * Time: O(n)
+     * Space: O(n)
      */
     public static String compress(String s) {
         if (s.length() == 0) {
@@ -191,6 +209,8 @@ public class C1 {
 
     /**
      * Problem 1.7
+     * Time: O(n^2)
+     * Space: O(1)
      */
     public static void rotate(int[][] image, boolean right) {
         if (right) {
@@ -240,6 +260,8 @@ public class C1 {
 
     /**
      * Problem 1.8
+     * Time: O(n^2)
+     * Space: O(matrix.length + matrix[0].length)
      */
     public static void zero(int[][] matrix) {
         Set<Integer> rowsWithZeros = new TreeSet<>();
@@ -274,6 +296,8 @@ public class C1 {
 
     /*
      * Complete problem 1.9
+     * Time: O(n)
+     * Space: O(n)
      */
     public static boolean isRotation(String s1, String s2) {
         if (s1.length() != s2.length()) {
