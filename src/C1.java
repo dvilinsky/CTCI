@@ -8,8 +8,9 @@ public class C1 {
                           {12, 19, 3},
                           {7, 14, 20},
                           {0, 6, 0}};
-       zero(matrix);
-       print2dArray(matrix);
+        System.out.println(isRotation("erbottlewat", "waterbottle"));
+        System.out.println(isRotation("waterbottle", "erbottlewat"));
+        System.out.println(isRotation("rotate", "taerot"));
     }
 
     /* Problem 1.1
@@ -269,5 +270,16 @@ public class C1 {
         for (int i = 0; i < matrix.length; i++) {
             matrix[i][column] = 0;
         }
+    }
+
+    /*
+     * Complete problem 1.9
+     */
+    public static boolean isRotation(String s1, String s2) {
+        if (s1.length() != s2.length()) {
+            return false;
+        }
+        String s3 = s1+s1;
+        return s3.contains(s2);
     }
 }
