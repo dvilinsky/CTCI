@@ -8,9 +8,7 @@ public class C1 {
                           {12, 19, 3},
                           {7, 14, 20},
                           {0, 6, 0}};
-        System.out.println(isRotation("erbottlewat", "waterbottle"));
-        System.out.println(isRotation("waterbottle", "erbottlewat"));
-        System.out.println(isRotation("rotate", "taerot"));
+
     }
 
     /* Problem 1.1
@@ -306,4 +304,5 @@ public class C1 {
         String s3 = s1+s1;
         return s3.contains(s2);
     }
+
 }
