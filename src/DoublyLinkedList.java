@@ -8,6 +8,7 @@ public class DoublyLinkedList<E> {
     private Node<E> tail;
     private int size;
 
+
     public DoublyLinkedList() {
         this.head = null;
         this.tail = null;
@@ -33,6 +34,25 @@ public class DoublyLinkedList<E> {
         }
         this.tail = end;
         this.size++;
+    }
+
+    /**
+     * Removes the value from the end of the list
+     * Running time; O(1)
+     */
+    public void delete() {
+        if (this.tail != null) {
+            if (this.size == 1) {
+                this.head = null;
+                this.tail = null;
+            } else {
+                this.tail.previous.next = this.head;
+                this.head.previous = this.tail.previous;
+                this.tail = this.tail.previous;
+            }
+            this.size--;
+        }
+
     }
 
     /**
