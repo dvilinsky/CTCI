@@ -60,7 +60,7 @@ public class DoublyLinkedList<E> {
     /** Problem 2.1
      * Removes duplicate elements from the list
      * Running time: O(n) or O(n^2), depending on if client wants to use extra space or extra time
-     * Space: O(n) or O(1), depending on if client wants to use extra space or extra time   
+     * Space: O(n) or O(1), depending on if client wants to use extra space or extra time
      */
     public void removeDuplicates(boolean useExtraSpace) {
         if (useExtraSpace) {
@@ -72,7 +72,26 @@ public class DoublyLinkedList<E> {
 
     private void removeUseExtraTime() {
         Node<E> current = head;
-
+        Node<E> seeker =  current.next;
+        int numRemoved = 0;
+        for (int i = 0; i < this.size; i++) {
+            while(seeker != head) {
+                if (seeker.data == current.data) {
+                    //remove node seeker is pointing to
+                    seeker.previous.next = seeker.next;
+                    seeker.next.previous = seeker.previous;
+                    numRemoved++;
+                    if (seeker == tail) {
+                        System.out.println("hello world");
+                        tail = seeker.previous;
+                    }
+                }
+                seeker = seeker.next;
+            }
+            current = current.next;
+            seeker = current.next;
+        }
+        this.size -= numRemoved;
     }
 
     private void removeUseExtraSpace() {
