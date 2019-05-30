@@ -1,3 +1,6 @@
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * This class implements a very basic circular doubly linked list
  * @param <E>
@@ -52,7 +55,45 @@ public class DoublyLinkedList<E> {
             }
             this.size--;
         }
+    }
 
+    /** Problem 2.1
+     * Removes duplicate elements from the list
+     * Running time: O(n) or O(n^2), depending on if client wants to use extra space or extra time
+     * Space: O(n) or O(1), depending on if client wants to use extra space or extra time   
+     */
+    public void removeDuplicates(boolean useExtraSpace) {
+        if (useExtraSpace) {
+            removeUseExtraSpace();
+        } else {
+            removeUseExtraTime();
+        }
+    }
+
+    private void removeUseExtraTime() {
+        Node<E> current = head;
+
+    }
+
+    private void removeUseExtraSpace() {
+        Node<E> current = head;
+        Set<E> duplicates = new HashSet<>();
+        int numRemoved = 0;
+        for (int i = 0; i < this.size; i++) {
+            if (duplicates.contains(current.data)) {
+                //remove current from list
+                current.previous.next = current.next;
+                current.next.previous = current.previous;
+                if (current == tail) {
+                    tail = current.previous;
+                }
+                numRemoved++;
+            } else {
+                duplicates.add(current.data);
+            }
+            current = current.next;
+        }
+        this.size -= numRemoved;
     }
 
     /**
