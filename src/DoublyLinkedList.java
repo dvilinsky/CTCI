@@ -2,7 +2,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * This class implements a very basic circular doubly linked list
+ * This class implements a circular doubly linked list that ends up having an interesting API due to the questions asked
+ * in CTCI Chapter 2
  * @param <E>
  */
 
@@ -44,23 +45,14 @@ public class DoublyLinkedList<E> {
      * Running time; O(1)
      */
     public void delete() {
-        if (this.tail != null) {
-            if (this.size == 1) {
-                this.head = null;
-                this.tail = null;
-            } else {
-                this.tail.previous.next = this.head;
-                this.head.previous = this.tail.previous;
-                this.tail = this.tail.previous;
-            }
-            this.size--;
-        }
+       removeNode(tail);
     }
+
 
     /** Problem 2.1
      * Removes duplicate elements from the list
-     * Running time: O(n) or O(n^2), depending on if client wants to use extra space or extra time
-     * Space: O(n) or O(1), depending on if client wants to use extra space or extra time
+     * Running time: O(n) or O(n^2), depending on if client wants to use extra space or extra time, respectively
+     * Space: O(n) or O(1), depending on if client wants to use extra space or extra time, respectively
      */
     public void removeDuplicates(boolean useExtraSpace) {
         if (useExtraSpace) {
@@ -113,6 +105,57 @@ public class DoublyLinkedList<E> {
             current = current.next;
         }
         this.size -= numRemoved;
+    }
+
+    /**
+     * Problem 2.2
+     * Since we have a doubly-linked list with a pointer to the head, the most-efficient implementation would be
+     * walk k steps backwards from the head. However, here I am acting as though we only bave a singly linked list
+     * for the sake of answering the question as it was asked. I'm also pretending we don't have a size field
+     * Running time: O(n)
+     * Space; O(1)
+     * @param k
+     */
+    public void removeKthToLast(int k) {
+        if (isEmpty()) {
+            return;
+        }
+        int index = getIndex(k);
+        Node<E> current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+        removeNode(current);
+    }
+
+    private int getIndex(int k) {
+        int size = 1; //start at 1 b/c we will stop looping right before tail
+        Node<E> current = head;
+        while (current != tail) {
+            size++;
+            current = current.next;
+        }
+        return size - k;
+    }
+
+    /**
+     * Removes a given node from this last. Also answers problem 2.3
+     * @param node The node to remove
+     */
+    private void removeNode(Node<E> node) {
+        if (size <= 1) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            node.previous.next = node.next;
+            node.next.previous = node.previous;
+            if (node == head) {
+                head = node.next;
+            } else if (node == tail) {
+                tail = node.previous;
+            }
+        }
+        this.size--;
     }
 
     /**
