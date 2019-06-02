@@ -7,7 +7,7 @@ import java.util.Set;
  * @param <E>
  */
 
-public class DoublyLinkedList<E> {
+public class DoublyLinkedList<E extends Comparable> {
     private Node<E> head;
     private Node<E> tail;
     private int size;
@@ -20,16 +20,44 @@ public class DoublyLinkedList<E> {
     }
 
     /**
+     * Adds a node containing data to front of list
+     * Running time: O(1)
+     * @param data Data to be contained in new node
+     */
+    public void shift(E data) {
+        Node<E> front = new Node<>(data);
+        if (isEmpty()) {
+            addEmpty(front);
+            this.tail = front;
+        } else {
+            head.previous = front;
+            tail.next = front;
+            front.next = head;
+            front.previous = tail;
+            head = front;
+        }
+        size++;
+    }
+
+    /**
+     * Adds a node to list when list is empty
+     * @param node Data to be contained in new node
+     */
+    private void addEmpty(Node<E> node) {
+        head = node;
+        node.next = node;
+        node.previous = node;
+    }
+
+    /**
      * Appends a node to the end of the list.
      * Running time: O(1)
-     * @param data
+     * @param data Data to be contained in new node
      */
-    public void add(E data) {
+    public void append(E data) {
         Node<E> end = new Node<>(data);
-        if (this.head == null && this.tail == null) {
-            this.head = end;
-            end.next = end;
-            end.previous = end;
+        if (isEmpty()) {
+            addEmpty(end);
         } else {
             this.tail.next = end;
             end.previous = this.tail;
@@ -159,6 +187,31 @@ public class DoublyLinkedList<E> {
     }
 
     /**
+     * Problem 2.4
+     * Partitions list around x, such that all values less than x come before all values greater than or equal to x
+     * Running time: O(n)
+     * Space: O(n). Tried to do it in place, really difficult w/ doubly linked circular list
+     * @param x The value around which to partition the list
+     */
+    @SuppressWarnings("unchecked")
+    public void partition(int x) {
+        Node<E> current = head;
+        int length = size;
+        size = 0;
+        head = null;
+        tail = null;
+        for (int i = 0; i < length; i++) {
+            E x1 = (E) Integer.valueOf((Integer) current.data);
+            if (current.data.compareTo(x) < 0) {
+                this.shift(x1);
+            } else {
+                this.append(x1);
+            }
+            current = current.next;
+        }
+    }
+
+    /**
      * Returns true when the list has size of 0, false otherwise
      * @return If the list is empty
      */
@@ -184,7 +237,7 @@ public class DoublyLinkedList<E> {
     }
 }
 
-class Node<E> {
+class Node<E extends Comparable> {
     public E data;
     public Node<E> next;
     public Node<E> previous;
