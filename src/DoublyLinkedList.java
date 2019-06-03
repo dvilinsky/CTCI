@@ -214,13 +214,14 @@ public class DoublyLinkedList<E extends Comparable> implements Iterable<E> {
      * Problem 2.5
      * Assuming that this list and l are both lists where each node represents a digit in an integer, returns the sum
      * of the values the lists represent. Again, for sake of answering the CTCI question as asked, the algorithm operates
-     * as though this were a singly-linked list.
+     * as though this were a singly-linked list. The question actually says to return a new list, but once you
+     * have the sum, returning a new list is trivial
      * Both lists must represent numbers in the same order as the other list
      * @param l The other list representing a number
      * @param reversed Whether digits are stored in reverse order or not
      * @return sum of values represented by each list
      */
-    public int sumWith(DoublyLinkedList<E> l, boolean reversed) {
+    public int sumWith(DoublyLinkedList<Integer> l, boolean reversed) {
         if (reversed) {
            return doSumReverse(l);
         } else {
@@ -228,14 +229,45 @@ public class DoublyLinkedList<E extends Comparable> implements Iterable<E> {
         }
     }
 
-    private int doSumReverse(DoublyLinkedList<E> l) {
-        Stack<Integer> thisStack = new Stack<>();
-        Stack<Integer> lStack = new Stack<>();
-        return 0;
+    private int doSumReverse(DoublyLinkedList<Integer> l) {
+        int thisVal = 0;
+        int lVal = 0;
+        int currentDecimalMultiplier = 1;
+        for (E i : this) {
+            thisVal += ((Integer) i * currentDecimalMultiplier);
+            currentDecimalMultiplier *= 10;
+        }
+        currentDecimalMultiplier = 1;
+        for (int i : l) {
+            lVal += (i * currentDecimalMultiplier);
+            currentDecimalMultiplier *= 10;
+        }
+        return thisVal + lVal;
     }
 
-    private int doSumNotReverse(DoublyLinkedList<E> l) {
-        return 0;
+    private int doSumNotReverse(DoublyLinkedList<Integer> l) {
+        Stack<Integer> thisStack = new Stack<>();
+        Stack<Integer> lStack = new Stack<>();
+        for (E i : this) {
+            thisStack.push((Integer) i);
+        }
+        for (int i : l) {
+            lStack.push(i);
+        }
+        //At this point, the algorithm is the same as when the lists are reversed.
+        //TODO: Figure out how to make doSumReverse generic enough to be able to call from this point
+        int thisVal = 0;
+        int lVal = 0;
+        int currentDecimalMultiplier = 1;
+        for (int i: thisStack) {
+            thisVal += ((Integer) i * currentDecimalMultiplier);
+            currentDecimalMultiplier *= 10;
+        }
+        for (int i : lStack) {
+            lVal += (i * currentDecimalMultiplier);
+            currentDecimalMultiplier *= 10;
+        }
+        return thisVal + lVal;
     }
 
     /**
