@@ -1,5 +1,4 @@
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * This class implements a circular doubly linked list that ends up having an interesting API due to the questions asked
@@ -7,7 +6,7 @@ import java.util.Set;
  * @param <E>
  */
 
-public class DoublyLinkedList<E extends Comparable> {
+public class DoublyLinkedList<E extends Comparable> implements Iterable<E> {
     private Node<E> head;
     private Node<E> tail;
     private int size;
@@ -212,6 +211,34 @@ public class DoublyLinkedList<E extends Comparable> {
     }
 
     /**
+     * Problem 2.5
+     * Assuming that this list and l are both lists where each node represents a digit in an integer, returns the sum
+     * of the values the lists represent. Again, for sake of answering the CTCI question as asked, the algorithm operates
+     * as though this were a singly-linked list.
+     * Both lists must represent numbers in the same order as the other list
+     * @param l The other list representing a number
+     * @param reversed Whether digits are stored in reverse order or not
+     * @return sum of values represented by each list
+     */
+    public int sumWith(DoublyLinkedList<E> l, boolean reversed) {
+        if (reversed) {
+           return doSumReverse(l);
+        } else {
+            return doSumNotReverse(l);
+        }
+    }
+
+    private int doSumReverse(DoublyLinkedList<E> l) {
+        Stack<Integer> thisStack = new Stack<>();
+        Stack<Integer> lStack = new Stack<>();
+        return 0;
+    }
+
+    private int doSumNotReverse(DoublyLinkedList<E> l) {
+        return 0;
+    }
+
+    /**
      * Returns true when the list has size of 0, false otherwise
      * @return If the list is empty
      */
@@ -234,6 +261,42 @@ public class DoublyLinkedList<E extends Comparable> {
         }
         s.append("]");
         return s.toString();
+    }
+
+    public Iterator<E> iterator() {
+        return new DLLIterator(this);
+    }
+
+    /**
+     * Implements an Iterator for the DoublyLinkedList class
+     */
+    private class DLLIterator implements Iterator<E> {
+        Node<E> current;
+        int size;
+        int currentSize;
+
+        DLLIterator(DoublyLinkedList<E> l) {
+            current = l.head;
+            size = l.size;
+            currentSize = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return currentSize != size;
+        }
+
+        @Override
+        public E next() {
+            if (hasNext()) {
+                currentSize++;
+                E data = current.data;
+                current = current.next;
+                return data;
+            } else {
+                throw new NoSuchElementException();
+            }
+        }
     }
 }
 
