@@ -270,6 +270,60 @@ public class DoublyLinkedList<E extends Comparable> implements Iterable<E> {
         return thisVal + lVal;
     }
 
+    /** Problem 2.6
+     * Checks if the values this list contains represents a palindrome
+     * @return True if list is palindrome, false otherwise
+     * @param recursive Flag to use recursive algorithm or not
+     */
+    public boolean isPalindrome(boolean recursive) {
+        if (recursive) {
+            return isPalindromeRecursive(head, 0).value;
+        } else {
+            return isPalindromeIterative();
+        }
+    }
+
+    private boolean isPalindromeIterative() {
+        Stack<E> stack = new Stack<>();
+        for (E element : this) {
+            stack.push(element);
+        }
+        Iterator<E> itr = this.iterator();
+        while (!stack.isEmpty()) {
+            if (!stack.pop().equals(itr.next())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static class Result<E extends Comparable<E>> {
+        Node<E> node;
+        boolean value;
+
+        Result(Node<E> node, boolean value) {
+            this.node = node;
+            this.value = value;
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private Result isPalindromeRecursive(Node<E> node, int length) {
+      if (length == 0) {
+          return new Result(head, true);
+      } else if (length == 1) {
+          return new Result(head.next, true);
+      }
+      Result r = isPalindromeRecursive(node.next, length - 2);
+      if (!r.value) {
+          return r;
+      }
+      r.value = r.node.data.equals(node.data);
+      r.node = r.node.next;
+      return r;
+    }
+
+
     /**
      * Returns true when the list has size of 0, false otherwise
      * @return If the list is empty
