@@ -1,3 +1,5 @@
+package chapter2;
+
 import java.util.*;
 
 /**
@@ -354,7 +356,7 @@ public class DoublyLinkedList<E extends Comparable> implements Iterable<E> {
     }
 
     /**
-     * Implements an Iterator for the DoublyLinkedList class
+     * Implements an Iterator for the chapter2.DoublyLinkedList class
      */
     private class DLLIterator implements Iterator<E> {
         Node<E> current;

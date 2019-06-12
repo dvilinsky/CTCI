@@ -1,3 +1,5 @@
+package chapter1;
+
 import java.util.*;
 
 public class C1 {
@@ -19,7 +21,7 @@ public class C1 {
         //O(n) space, O(n) time
 //        List<Character> l = new ArrayList<>();
 //        for (char c : s.toCharArray()) {
-//            l.add(c);
+//            l.append(c);
 //        }
 //        return s.length() == (new HashSet<Character>(l)).size();
         //O(1) space, O(n^2) time
