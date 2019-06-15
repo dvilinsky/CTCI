@@ -1,16 +1,19 @@
 package chapter2;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class SinglyLinkedNode {
     SinglyLinkedNode next = null;
-    int data;
+    String data;
     int size;
 
-    public SinglyLinkedNode(int data) {
+    public SinglyLinkedNode(String data) {
         this.data = data;
         this.size = 0;
     }
 
-    public void append(int data) {
+    public void append(String data) {
         SinglyLinkedNode end = new SinglyLinkedNode(data);
         SinglyLinkedNode current = this;
         while (current.next != null) {
@@ -18,6 +21,12 @@ public class SinglyLinkedNode {
         }
         current.next = end;
         size++;
+    }
+
+
+    @Override
+    public String toString() {
+        return this.data;
     }
 
     /**
