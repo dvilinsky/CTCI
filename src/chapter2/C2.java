@@ -2,7 +2,9 @@ package chapter2;
 
 import chapter2.DoublyLinkedList;
 
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 public class C2 {
     public static void main(String[] args) {
@@ -21,14 +23,16 @@ public class C2 {
      * @return
      */
     public static SinglyLinkedNode startOfLoop(SinglyLinkedNode node) {
-        SinglyLinkedNode fast = node;
-        SinglyLinkedNode slow = node;
-        while (true) {
-            fast = fast.next.next;
-            slow = slow.next;
-            if (fast == slow) {
-                return fast.next;
+        Set<SinglyLinkedNode> nodes = new HashSet<>();
+        while (node != null) {
+            if (nodes.contains(node)) {
+                return node;
+            } else {
+                nodes.add(node);
+                node = node.next;
             }
         }
+        //Should never happen
+        return null;
     }
 }
