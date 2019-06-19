@@ -46,6 +46,19 @@ public class ThreeStack {
         tops.put(stack, top);
     }
 
+    /**
+     * Returns without removing the top element of a given stack
+     * @param stack the stack whose top element you want to view
+     * @return the top of element of the given stack
+     */
+    public int peek(int stack) {
+        return backingArray[tops.get(stack) - 1];
+    }
+
+    public int pop(int stack) {
+        
+    }
+
     private boolean isFull(int stack, int top) {
        return tops.get(stack) == limits.get(stack);
     }
