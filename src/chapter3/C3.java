@@ -18,5 +18,16 @@ public class C3 {
         stack.push(11, 1);
         stack.push(44, 2);
         System.out.println(stack);
+
+        System.out.println(stack.pop(0));
+        stack.push(100, 0);
+
+        System.out.println(stack.pop(1));
+        stack.push(200, 1);
+
+        System.out.println(stack.pop(2));
+        stack.push(300, 2);
+
+        System.out.println(stack);
     }
 }

@@ -55,8 +55,16 @@ public class ThreeStack {
         return backingArray[tops.get(stack) - 1];
     }
 
+    /**
+     * Removes and returns the top element of a given stack
+     * @param stack the stack whose top element you want to return
+     * @return the top element of the given stack
+     */
     public int pop(int stack) {
-        
+        int newTop = tops.get(stack) - 1;
+        int data = backingArray[newTop];
+        tops.put(stack, newTop);
+        return data;
     }
 
     private boolean isFull(int stack, int top) {
