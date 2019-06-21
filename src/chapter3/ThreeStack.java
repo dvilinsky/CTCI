@@ -61,6 +61,7 @@ public class ThreeStack {
      * @return the top element of the given stack
      */
     public int pop(int stack) {
+        //TODO: Check to see if empty
         int newTop = tops.get(stack) - 1;
         int data = backingArray[newTop];
         tops.put(stack, newTop);
@@ -69,6 +70,10 @@ public class ThreeStack {
 
     private boolean isFull(int stack, int top) {
        return tops.get(stack) == limits.get(stack);
+    }
+
+    public boolean isEmpty(int stack) {
+        return false;
     }
 
     /**
