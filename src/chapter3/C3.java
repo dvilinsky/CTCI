@@ -2,32 +2,16 @@ package chapter3;
 
 public class C3 {
     public static void main(String[] args) {
-        ThreeStack stack = new ThreeStack(10);
-        stack.push(1, 0);
-        stack.push(2, 0);
-        stack.push(3, 0);
-        stack.push(4, 0);
-        stack.push(5, 1);
-        stack.push(22, 1);
-        stack.push(19, 1);
-        stack.push(9, 2);
-        stack.push(56, 2);
-        stack.push(27, 2);
-        stack.push(6, 0);
-        stack.push(7, 0);
-        stack.push(11, 1);
-        stack.push(44, 2);
+        MinStack<Integer> stack = new MinStack<>();
+        int[] data = {5, 6, 2, 11, 14, 13, 12, 0, 4, 7};
+        for (int i = 0; i < data.length; i++) {
+            stack.push(data[i]);
+        }
         System.out.println(stack);
-
-        System.out.println(stack.pop(0));
-        stack.push(100, 0);
-
-        System.out.println(stack.pop(1));
-        stack.push(200, 1);
-
-        System.out.println(stack.pop(2));
-        stack.push(300, 2);
-
-        System.out.println(stack);
+        System.out.println(stack.getMin());
+        stack.pop(); stack.pop(); stack.pop();
+        System.out.println(stack.getMin());
+        stack.push(-25);
+        System.out.println(stack.getMin());
     }
 }

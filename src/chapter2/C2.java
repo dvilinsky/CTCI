@@ -9,7 +9,7 @@ import java.util.Set;
 public class C2 {
     public static void main(String[] args) {
         SinglyLinkedNode list = makeCircularList(3, 5);
-        printCircularList(list);
+        System.out.println(startOfLoop(list));
     }
 
     public static void printList(DoublyLinkedList d) {
@@ -36,6 +36,7 @@ public class C2 {
             }
         }
         return null;
+        //Easy way using O(n) extra space
 //        Set<SinglyLinkedNode> nodes = new HashSet<>();
 //        while (node != null) {
 //            if (nodes.contains(node)) {
